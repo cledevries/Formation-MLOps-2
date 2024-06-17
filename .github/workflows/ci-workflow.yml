@@ -28,8 +28,8 @@ jobs:
       - name: Run Vulture
       #   run:  "Trainee should add command to run vulture"
         run : |
-        pip install vulture
-        vulture scripts --min_confidence 100
+          pip install vulture
+          vulture scripts --min_confidence 100
       - name: Run tests
         # run:  "Trainee should add command to run test"
         run: |
