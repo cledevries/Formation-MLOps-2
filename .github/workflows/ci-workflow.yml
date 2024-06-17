@@ -19,8 +19,8 @@ jobs:
           pip install -r requirements.txt
       - name: Install dev dependencies
         run:  pip install -r requirements_test.txt
-      # - name: Run Linter
-      #   run: |
+      - name: Run Linter
+        run: flake8 formation_indus_ds_avancee
       #     # stop the build if there are Python syntax errors or undefined names
       #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       #     # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
@@ -29,10 +29,10 @@ jobs:
       #   run:  "Trainee should add command to run vulture"
         run : |
           pip install vulture
-          vulture scripts --min-confidence 100
+          vulture scripts formation_indus_ds_avancee --min-confidence 100
       - name: Run tests
         # run:  "Trainee should add command to run test"
         run: |
           # pip install pytest pytest-cov
           # pytest tests/test_unit/test_feature_engineering.py
-          python -m pytest tests/test_unit/test_feature_engineering.py
+          python -m pytest tests/test_unit
