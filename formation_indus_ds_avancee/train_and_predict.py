@@ -17,10 +17,15 @@ def train_model(features: pd.DataFrame, model_registry_folder: str) -> None:
     target = 'Ba_avg'
     X = features.drop(columns=[target])
     y = features[target]
+    mlflow.set_tracking_uri("http://0.0.0.0:44691")
     with mlflow.start_run():
         # insert autolog here ...
+        mlflow.sklearn.autolog(log_models=False)
         model = RandomForestRegressor(n_estimators=1, max_depth=10, n_jobs=1)
         model.fit(X, y)
+        mlflow.sklearn.log_model(sk_model = model, # reprendre le nom du modèle entrainé dans le script
+                                 artifact_path = "modeles_de_clem", # nom du dossier ??
+                                 registered_model_name = "model_clem") # nom du modèle dans mlflow
     time_str = time.strftime('%Y%m%d-%H%M%S')
     joblib.dump(model, os.path.join(model_registry_folder, time_str + '.joblib'))
 
